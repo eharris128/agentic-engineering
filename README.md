@@ -2,27 +2,39 @@
 
 If you think I am talking about vibe coding... I am not.
 
+Don't take it from me though - [Anthropic's Cookbook for Research Lead Engineer](https://github.com/anthropics/anthropic-cookbook/blob/46f21f95981e3633d7b1eac235351de4842cf9f0/patterns/agents/prompts/research_lead_agent.md?plain=1#L135-L137)
 
-## Teachers
+
+## Industry Teachers
 - [Steve Yegge](https://www.linkedin.com/in/steveyegge)
-	- https://sourcegraph.com/blog/the-brute-squad
    	- https://sourcegraph.com/blog/revenge-of-the-junior-developer
+	- https://sourcegraph.com/blog/the-brute-squad
 - [IndyDevDan](https://www.youtube.com/@indydevdan/videos)
 
 ## Helpful Resources
+- More Anthropic Cookbook Resources
+	- [Subagent OODA](https://github.com/anthropics/anthropic-cookbook/blob/46f21f95981e3633d7b1eac235351de4842cf9f0/patterns/agents/prompts/research_subagent.md?plain=1#L10)
+ - Inspiration
+ 	- [Claude's Research Mode](https://www.anthropic.com/engineering/built-multi-agent-research-system)
+  	- [The Creator of Flask's Current Agentic Dev Loop](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
+     		- [Watch him do it live](https://www.youtube.com/watch?v=sQYXZCUvpIc&ab_channel=ArminRonacher)
 - MCP Servers
-	- https://github.com/BeehiveInnovations/zen-mcp-server
+	- [Collaboration among LLMs from Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server)
+ 	- [Official Figma MCP Guide](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server)
+  	- [Easy screenshot capabilities from Snap Happy](https://github.com/badlogic/lemmy/tree/main/apps/snap-happy)
 
 ## Using Claude Code
-- Run `/init` within claude code to get it familiar with your repository
+- Run `/init` within Claude Code to get it familiar with your repository
 - Shift tab shift tab to enter plan mode in Claude
 	- Use plan mode for any initial inqiury into a bug or a feature
 
 ## Git Worktree Based Agentic Dev Loop
-- After you work with Claude's plan mode to come up with a spec save it to a specs directory within your repo (e.g. `./specs/new-login-flow.md`)
+- After you work with Claude's plan mode to come up with a spec save it to a specs directory within your repo (e.g. `./specs/new-login-flow.md`)...
 - Get your git worktrees setup.
 	- Create a command in your `./.claude/commands` directory, still within your repo
 		- e.g. `simple-init-parallel.md`
+  		- You can whitelist or deny list commands with a `settings.json` file, also within your `.claude` directory. I provide an example below the `simple-init-parallel` example. 
+
 
 Example:
 ```
@@ -54,7 +66,7 @@ CREATE worktree N:
 - RUN `git worktree add ./trees/FEATURE_NAME-N` (uses current branch)
 - COPY Claude settings:
   - CREATE directory `./trees/FEATURE_NAME-N/.CLAUDE`
-  - COPY `.CLAUDE/auto-approve.json` to `./trees/FEATURE_NAME-N/.CLAUDE/auto-approve.json`
+  - COPY `.CLAUDE/settings.json` to `./trees/FEATURE_NAME-N/.CLAUDE/settings.json`
   - COPY `.CLAUDE/COMMANDS` directory to `./trees/FEATURE_NAME-N/.CLAUDE/COMMANDS` if it exists
   - COPY `CLAUDE.md` to `./trees/FEATURE_NAME-N/CLAUDE.md`
 - INSTALL npm dependencies:
@@ -64,7 +76,7 @@ CREATE worktree N:
 - SET PORT=300N for React app (use `PORT=300N npm start` when running)
 - VALIDATE setup:
   - CHECK that `./trees/FEATURE_NAME-N/ui/node_modules` exists
-  - CHECK that `./trees/FEATURE_NAME-N/.CLAUDE/auto-approve.json` exists
+  - CHECK that `./trees/FEATURE_NAME-N/.CLAUDE/settings.json` exists
   - CHECK that `./trees/FEATURE_NAME-N/ui/.env` exists
 
 VERIFY all worktrees by running `git worktree list`
@@ -90,7 +102,7 @@ Note: Port numbers are calculated as 3000 + N (e.g., worktree 1 uses port 3001, 
 
 ## Auto-Approved Commands
 
-The `auto-approve.json` file copied to each worktree configures which commands agents can execute without prompting for approval. This includes:
+The `settings.json` file copied to each worktree configures which commands agents can execute without prompting for approval. This includes:
 
 ### NPM Commands
 - `npm install`
@@ -143,7 +155,7 @@ Invoke the command inside of claude:
 ## Implementing the spec
 - You have your spec. You have your repository copies. Now you just need Claude to iterate on them.
 
-- Create another command to have Claude perform iterate on each worktree in parallel:
+- Create another command to have Claude iterate on each worktree in parallel:
 	- e.g. `exe-parallel add-new-button 3`
 
 Example:
@@ -188,8 +200,8 @@ For each worktree (1 to NUMBER_OF_PARALLEL_WORKTREES):
 - VERIFY worktree exists at `./trees/{SPEC_NAME}-N`
 - CHECK that `./trees/{SPEC_NAME}-N/ui/node_modules` exists
   - IF missing, RUN `cd ./trees/{SPEC_NAME}-N/ui && npm install`
-- CHECK that `./trees/{SPEC_NAME}-N/.CLAUDE/auto-approve.json` exists
-  - IF missing, COPY from `.CLAUDE/auto-approve.json`
+- CHECK that `./trees/{SPEC_NAME}-N/.CLAUDE/settings.json` exists
+  - IF missing, COPY from `.CLAUDE/settings.json`
 - CHECK that `./trees/{SPEC_NAME}-N/CLAUDE.md` exists
   - IF missing, COPY from `./CLAUDE.md`
 
@@ -218,7 +230,7 @@ Each agent will independently implement the engineering plan detailed in PLAN_TO
 - DO NOT modify any files in the parent directories or other worktrees
 
 **AUTO-APPROVAL FOR COMMON OPERATIONS:**
-Each agent should follow the auto-approval rules defined in `.CLAUDE/auto-approve.json` which covers npm commands, file operations, and git operations without requiring user prompts.
+Each agent should follow the auto-approval rules defined in `.CLAUDE/settings.json` which covers npm commands, file operations, and git operations without requiring user prompts.
 
 When the subagent completes it's work:
 
@@ -257,7 +269,6 @@ After all agents complete:
 
 - Invoke the command inside of claude:
 `exe-parallel my_spec_file.md 3`
-
 
 ## Quality of Life Enhancements
 If you do not have a settings.json file, then you will need to grant permissions for tool invocations.
@@ -412,3 +423,10 @@ For example:
 ### Minor Hacks
 - Make edits to .git/info/exclude in your working repository to ignore files or directories without making changes to your .gitignore
 
+## Additional Resoruces
+- https://research.google/pubs/an-introduction-to-googles-approach-for-secure-ai-agents/
+
+## Closing Comments
+- In my naive claude commands, you can see a spread between these initial ones and how Anthropic structures their prompts.
+- I run `npm install` fresh for each worktree due to issues to with symlinking. I aspire to use [Container Use](https://github.com/dagger/container-use) to remediate this issue. Start simple though.
+- The `settings.json` needs refinement and may or may not work as intended. People have different opinions on `allowing all` or not. I actively hack MCP Servers (most are compromisable) so I default to not allowing all - YMMV.
