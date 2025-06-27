@@ -18,6 +18,7 @@ Don't take it from me though - [Anthropic's Cookbook for Research Lead Engineer]
  	- [Claude's Research Mode](https://www.anthropic.com/engineering/built-multi-agent-research-system)
   	- [The Creator of Flask's Current Agentic Dev Loop](https://lucumr.pocoo.org/2025/6/12/agentic-coding/)
      		- [Watch him do it live](https://www.youtube.com/watch?v=sQYXZCUvpIc&ab_channel=ArminRonacher)
+	- [Initial git worktree inspiration](https://www.pulsemcp.com/posts/how-to-use-claude-code-to-wield-coding-agent-clusters)
 - MCP Servers
 	- [Collaboration among LLMs from Zen MCP Server](https://github.com/BeehiveInnovations/zen-mcp-server)
  	- [Official Figma MCP Guide](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Dev-Mode-MCP-Server)
@@ -424,7 +425,15 @@ For example:
 - Make edits to .git/info/exclude in your working repository to ignore files or directories without making changes to your .gitignore
 
 ## Additional Resoruces
-- https://research.google/pubs/an-introduction-to-googles-approach-for-secure-ai-agents/
+- [Google approach to secure AI Agents](https://research.google/pubs/an-introduction-to-googles-approach-for-secure-ai-agents/)
+- [Cursor team take on building on top of LLM's YT](https://x.com/alexalbert__/status/1932457221507695041)
+- [React hook](https://github.com/modelcontextprotocol/use-mcp)
+- [Adding task management ontop of Claude Code from Within Cursor](https://github.com/eyaltoledano/claude-task-master)
+
+### Building MCP Servers
+- [MCP Server Design Best Practices](https://engineering.block.xyz/blog/blocks-playbook-for-designing-mcp-servers)
+- [OAuth Advice for MCP Servers (TLDR - do not roll your own)](https://den.dev/blog/mcp-prm-auth/)
+- [Security Best Practices](https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices)
 
 ## Closing Comments
 - In my naive claude commands, you can see a spread between these initial ones and how Anthropic structures their prompts.
