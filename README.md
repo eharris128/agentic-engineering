@@ -430,6 +430,10 @@ For example:
 - [React hook](https://github.com/modelcontextprotocol/use-mcp)
 - [Adding task management ontop of Claude Code from Within Cursor](https://github.com/eyaltoledano/claude-task-master)
 - [AI Agent Infra - Gitpod](https://www.gitpod.io/blog/ai-agents-need-infrastructure)
+- 
+
+### Mastering Claude Code
+- [Rolling through tech debt with ease](https://blog.puzzmo.com/posts/2025/07/30/six-weeks-of-claude-code/)
 
 ### Building MCP Servers
 - [MCP Server Design Best Practices](https://engineering.block.xyz/blog/blocks-playbook-for-designing-mcp-servers)
