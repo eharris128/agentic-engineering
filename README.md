@@ -15,6 +15,7 @@ Don't take it from me though - [Anthropic's Cookbook for Research Lead Engineer]
 - [IndyDevDan](https://www.youtube.com/@indydevdan/videos)
 
 ## Helpful Resources
+- [Learn Prompt Engineering](https://docs.google.com/spreadsheets/d/19jzLgRruG9kjUQNKtCg1ZjdD6l6weA6qRXG5zLIAhC8/edit?gid=869808629#gid=869808629)
 - More Anthropic Cookbook Resources
 	- [Subagent OODA](https://github.com/anthropics/anthropic-cookbook/blob/46f21f95981e3633d7b1eac235351de4842cf9f0/patterns/agents/prompts/research_subagent.md?plain=1#L10)
  - Inspiration
