@@ -4,6 +4,9 @@ If you think I am talking about vibe coding... I am not.
 
 Don't take it from me though - [Anthropic's Cookbook for Research Lead Engineer](https://github.com/anthropics/anthropic-cookbook/blob/46f21f95981e3633d7b1eac235351de4842cf9f0/patterns/agents/prompts/research_lead_agent.md?plain=1#L135-L137)
 
+## Evals
+- [Inspect from AISI - scorer pattern](https://inspect.aisi.org.uk/scorers.html)
+
 ## Context Engineering
 - [Effective Context Engineering - by Anthropic](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
 - [Context Editing](https://docs.claude.com/en/docs/build-with-claude/context-editing)
